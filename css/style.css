@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  overflow: hidden; }
+
+.loading__wrapper {
+  display: flex;
+  z-index: 100;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center; }
+
+.loading {
+  max-width: 50%;
+  text-align: center;
+  line-height: 1.4;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Century Gothic", sans-serif; }
+  .loading__author {
+    display: block;
+    color: gray;
+    font-weight: normal;
+    font-size: 0.9rem;
+    margin: 0.6rem 0 2rem 0; }
+  .loading__anim {
+    border: 2px solid black;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: rotate 1s infinite alternate; }
+
+@keyframes rotate {
+  0% {
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent; }
+  25% {
+    border-top-width: 5px;
+    border-style: solid;
+    border-color: dodgerblue; }
+  50% {
+    border-right-width: 5px;
+    border-style: solid;
+    border-color: dodgerblue;
+    transform: rotate(90deg); }
+  75% {
+    border-bottom-width: 5px;
+    border-style: solid;
+    border-color: dodgerblue;
+    transform: rotate(180deg); }
+  100% {
+    border-left-width: 5px;
+    border-style: solid;
+    border-color: dodgerblue;
+    transform: rotate(270deg); } }
+
+.weather {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  grid-template-rows: 1fr 1fr 1fr;
+  min-height: 100vh;
+  width: 100%;
+  border: 10px solid #0077b5;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  font-family: "Century Gothic", sans-serif; }
+  .weather__city {
+    position: relative;
+    grid-column: 2 / 3;
+    align-self: flex-end;
+    justify-self: center; }
+    .weather__city h1 {
+      font-size: 40px; }
+    .weather__city h2 {
+      text-align: center; }
+  .weather__days {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    display: flex;
+    align-self: center;
+    justify-self: center; }
+    .weather__days p {
+      margin: 5px; }
+  .weather__search {
+    margin: 5rem 2.5rem;
+    display: none; }
+    .weather__search__input {
+      height: 30px;
+      border-color: darkslateblue;
+      background-color: azure; }
+    .weather__search__submit {
+      border-color: darkslateblue;
+      border-left: none;
+      background-color: azure;
+      height: 30px;
+      cursor: pointer; }

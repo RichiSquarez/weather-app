@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather</title>
+    <link rel="shortcut icon" href="https://cdn.iconscout.com/icon/free/png-256/free-weather-296-1100758.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+</head>
+<body>
+    <section class="loading__wrapper">
+        <div class="loading">
+            Loading your weather...
+            <span class="loading__author">- PanyGolf :)</span>
+            <span class="loading__anim"></span>
+        </div>
+    </section>
+
+    <section class="weather">
+        <div class="weather__city"><h1></h1><h2 class="weather__city__temperature"></h2></div>
+        <div class="weather__days">
+            <p>Monday</p>
+            <p>Tuesday</p>
+            <p>Wednesday</p>
+            <p>Thursday</p>
+            <p>Friday</p>
+            <p>Saturday</p>
+            <p>Sunday</p>
+        </div>
+        <div class="weather__search">
+            <input class="weather__search__input" type="text" name="city" id="city_search" placeholder="Search for the city">
+            <button class="weather__search__submit">-></button>
+        </div>
+    </section>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

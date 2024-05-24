@@ -1,0 +1,89 @@
+.loading__wrapper{
+  display:flex;
+  z-index: 100;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading{
+  max-width: 50%;
+  text-align: center;
+  line-height: 1.4;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Century Gothic", sans-serif;
+  &__author{
+    display: block;
+    color: gray;
+    font-weight: normal;
+    font-size: 0.9rem;
+    margin: 0.6rem 0 2rem 0;
+  }
+  &__anim{
+    border: 2px solid black;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: rotate 1s infinite alternate;
+  }
+}
+
+@keyframes rotate {
+  0% {
+
+    border-width: 0;
+
+    border-style: solid;
+
+    border-color: transparent;
+
+  }
+
+  25% {
+
+    border-top-width: 5px;
+
+    border-style: solid;
+
+    border-color: dodgerblue;
+
+  }
+
+  50%{
+
+    border-right-width: 5px;
+
+    border-style: solid;
+
+    border-color: dodgerblue;
+
+    transform: rotate(90deg);
+
+  }
+
+  75%{
+
+    border-bottom-width: 5px;
+
+    border-style: solid;
+
+    border-color: dodgerblue;
+
+    transform: rotate(180deg);
+
+  }
+
+  100%{
+
+    border-left-width: 5px;
+
+    border-style: solid;
+
+    border-color: dodgerblue;
+
+    transform: rotate(270deg);
+
+  }
+}
