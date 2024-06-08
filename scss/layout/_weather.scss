@@ -23,14 +23,26 @@
     &__temperature{
     }
   }
-  &__days{
+  &__time{
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     display: flex;
     align-self: center;
     justify-self: center;
+    position: relative;
     p{
-      margin: 5px;
+      font-size: 30px;
+      margin: 10px;
+    }
+    &__temperature{
+      display: flex;
+      position: absolute;
+      top: 100%;
+      p{
+        margin: 8px;
+        font-size: 15px;
+        text-align: center;
+      }
     }
   }
   &__search{
@@ -40,8 +52,11 @@
       height: 30px;
       border-color: darkslateblue;
       background-color: azure;
+      position: relative;
     }
     &__submit{
+      position: absolute;
+      right: 11.8rem;
       border-color: darkslateblue;
       border-left: none;
       background-color: azure;
@@ -54,6 +69,12 @@
 @media screen and (max-width: 560px){
   .weather__search{
     margin: 5rem 2.5rem 5rem -5rem;
+  }
+}
+
+@media screen and (max-width: 1160px){
+  .weather__search__submit{
+    right: 6rem;
   }
 }
 

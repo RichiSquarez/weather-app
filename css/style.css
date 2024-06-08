@@ -79,22 +79,35 @@ body {
       font-size: 40px; }
     .weather__city h2 {
       text-align: center; }
-  .weather__days {
+  .weather__time {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     display: flex;
     align-self: center;
-    justify-self: center; }
-    .weather__days p {
-      margin: 5px; }
+    justify-self: center;
+    position: relative; }
+    .weather__time p {
+      font-size: 30px;
+      margin: 10px; }
+    .weather__time__temperature {
+      display: flex;
+      position: absolute;
+      top: 100%; }
+      .weather__time__temperature p {
+        margin: 8px;
+        font-size: 15px;
+        text-align: center; }
   .weather__search {
     margin: 5rem 2.5rem;
     display: none; }
     .weather__search__input {
       height: 30px;
       border-color: darkslateblue;
-      background-color: azure; }
+      background-color: azure;
+      position: relative; }
     .weather__search__submit {
+      position: absolute;
+      right: 11.8rem;
       border-color: darkslateblue;
       border-left: none;
       background-color: azure;
@@ -104,3 +117,7 @@ body {
 @media screen and (max-width: 560px) {
   .weather__search {
     margin: 5rem 2.5rem 5rem -5rem; } }
+
+@media screen and (max-width: 1160px) {
+  .weather__search__submit {
+    right: 6rem; } }

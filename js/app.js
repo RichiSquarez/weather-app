@@ -19,7 +19,7 @@ async function getWeatherData() {
         });
         const latitude = getLat(position);
         const longitude = getLong(position);
-        const api = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,is_day,rain,snowfall,wind_speed_10m&hourly=temperature_2m,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto`;
+        const api = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,is_day,rain,snowfall&hourly=temperature_2m&forecast_days=1`;
         const weather = await axios.get(api);
         const city = document.querySelector(".weather__city h1");
         async function cityName(){
@@ -32,6 +32,7 @@ async function getWeatherData() {
                 console.error(e.message);
             }
         }
+        await getTime(latitude, longitude);
         await cityName();
         if (weather.data.current.is_day){
             document.querySelector('.weather').style.backgroundImage = 'linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2FCqOvBFE.jpg&f=1&nofb=1&ipt=5f73cba553806e72b7ab4885f5e3401539a9fe4d351f57a126cac65b206a03c9&ipo=images")';
@@ -60,6 +61,16 @@ async function getWeatherData() {
         }
         temperatureNow.innerText = Math.round(weather.data.current.temperature_2m) + "°C";
         console.log(weather.data)
+
+        async function timeFunction(){
+            try{
+
+            }
+            catch(e){
+                console.error(e.message);
+            }
+        }
+
     }catch(e){
         console.log(e.message);
     }
@@ -70,9 +81,59 @@ async function getWeatherData() {
 
 getWeatherData();
 
+async function getTime(lat, long){
+    try{
+        const api1 = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,is_day,rain,snowfall&hourly=temperature_2m&forecast_days=1`;
+        const weather = await axios.get(api1);
+        console.log(await weather)
+        const time1 = document.querySelector("#time1")
+        time1.innerText = "";
+        const api2 = `http://api.timezonedb.com/v2.1/get-time-zone?key=TVELJW0040YA&format=json&by=position&lat=${lat}&lng=${long}`;
+        const time = await axios.get(api2);
+        const timeArr = await weather.data.hourly.time
+        const tempArr = await weather.data.hourly.temperature_2m;
+        await console.log(timeArr)
+        const curTime = time.data.formatted;
+        let tempTime = curTime.split("")[11] + curTime.split("")[12];
+        time1.innerText = tempTime;
+        document.querySelector(".temp1").innerText = `${await weather.data.current.temperature_2m}°C`;
+        console.log(timeArr[Number(tempTime)]);
+        for(let i = 1; i < 8; ++i){
+            const index = Number(tempTime) + i;
+            let timeText = timeArr[index][11] + timeArr[index][12];
+            let timeTemp = tempArr[index];
+            document.querySelector(`.temp${i+1}`).innerText = `${timeTemp}°C`;
+            if(timeText === "23"){
+                const timeElement = `time${i + 2}`;
+                document.getElementById(timeElement).innerText = "00";
+                const dump = `time${i + 1}`;
+                document.getElementById(dump).innerText = timeText;
+            }
+            // }else if(timeText === "00"){
+            //     const timeElement = `time${i + 1}`;
+            //     document.getElementById(timeElement).innerText = timeArr[1][11] + timeArr[1][12];
+            // }
+            else{
+                const timeElement = `time${i + 1}`;
+                document.getElementById(timeElement).innerText = timeText;
+            }
+        }
+    }
+    catch (e) {
+        console.error(e.message);
+    }
+}
+
+
+
 
 const submit = document.querySelector(".weather__search__submit");
 submit.addEventListener("click", searchCity);
+document.querySelector(".weather__search__input").addEventListener("keyup", (k) => {
+    if(k.key === "Enter"){
+        searchCity();
+    }
+})
 
 async function searchCity(){
     const input = document.querySelector(".weather__search__input");
@@ -84,10 +145,11 @@ async function searchCity(){
         const lat = result.data[0].lat;
         const long = result.data[0].lon;
         document.querySelector(".weather__city h1").innerText = result.data[0].name;
+        await getTime(lat, long);
         try{
             const api = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,is_day,rain,snowfall,wind_speed_10m&hourly=temperature_2m,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto`;
             const result = await axios.get(api);
-            document.querySelector(".weather__city__temperature").innerText = `${result.data.current.temperature_2m}°C`;
+            document.querySelector(".weather__city__temperature").innerText = `${Math.round(result.data.current.temperature_2m)}°C`;
         }
         catch (e) {
             console.error(e.message);
