@@ -60,16 +60,6 @@ async function getWeatherData() {
             document.querySelector(".weather__city").append(snowfall);
         }
         temperatureNow.innerText = Math.round(weather.data.current.temperature_2m) + "°C";
-        console.log(weather.data)
-
-        async function timeFunction(){
-            try{
-
-            }
-            catch(e){
-                console.error(e.message);
-            }
-        }
 
     }catch(e){
         console.log(e.message);
@@ -85,7 +75,6 @@ async function getTime(lat, long){
     try{
         const api1 = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,is_day,rain,snowfall&hourly=temperature_2m&forecast_days=1`;
         const weather = await axios.get(api1);
-        console.log(await weather)
         const time1 = document.querySelector("#time1")
         time1.innerText = "";
         const api2 = `http://api.timezonedb.com/v2.1/get-time-zone?key=TVELJW0040YA&format=json&by=position&lat=${lat}&lng=${long}`;
@@ -97,7 +86,6 @@ async function getTime(lat, long){
         let tempTime = curTime.split("")[11] + curTime.split("")[12];
         time1.innerText = tempTime;
         document.querySelector(".temp1").innerText = `${await weather.data.current.temperature_2m}°C`;
-        console.log(timeArr[Number(tempTime)]);
         for(let i = 1; i < 8; ++i){
             const index = Number(tempTime) + i;
             let timeText = timeArr[index][11] + timeArr[index][12];
